@@ -1,0 +1,21 @@
+name: TSNCVerifierSpec
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    # Weekly.
+    - cron: '0 0 * * 0'
+
+jobs:
+  tests:
+    name: tests 
+    runs-on: ubuntu-22.04
+    container:
+      image: crystallang/crystal
+    steps:
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
+      - name: Run tsnc tests
+        run: crystal spec ./spec/*

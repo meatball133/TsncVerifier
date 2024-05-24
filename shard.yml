@@ -1,0 +1,10 @@
+name: TsncVerifier
+version: 0.1.0
+
+authors:
+  - meatball meatballsofmeatballs@gmail.com
+
+description: |
+  A library to verify scenes in godot
+
+license: Apache License 2.0
