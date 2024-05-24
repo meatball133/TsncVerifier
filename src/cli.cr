@@ -1,4 +1,5 @@
 require "option_parser"
+require "./tsnc_parser"
 
 folder : String? = nil
 file : String? = nil
@@ -22,3 +23,6 @@ OptionParser.parse do |parser|
     exit(1)
   end
 end
+
+test = TsncParser.new
+test.parse_folder("./scenes/")
