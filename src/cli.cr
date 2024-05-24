@@ -26,3 +26,4 @@ end
 
 test = TsncParser.new
 test.parse_folder("./scenes/")
+test.output_result!
