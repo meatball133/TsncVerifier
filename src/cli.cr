@@ -25,6 +25,7 @@ OptionParser.parse do |parser|
 end
 
 test = TsncParser.new
+
 if temp_folder = folder
   test.parse_folder(Path.new(temp_folder))
 end
@@ -32,4 +33,5 @@ end
 if temp_file = file
   test.parse_file(Path.new(temp_file))
 end
+
 test.output_result!
