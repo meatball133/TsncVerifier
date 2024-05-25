@@ -6,11 +6,11 @@ file : String? = nil
 
 OptionParser.parse do |parser|
   parser.banner = "Usage: tsnc [arguments]"
-  parser.on("-f FILE", "--file=FILE", "fike of a scene to parse") { |file| file = file }
-  parser.on("--folder=Folder", "Specifies the folder where scenes to parse") do |folder|
-    raise ArgumentError, "Folder does not exist" unless Dir.directory?(folder)
-    raise ArgumentError, "You can't specify both a file and a folder" if file
-    folder = folder
+  parser.on("-f FILE", "--file=FILE", "fike of a scene to parse") { |file_path| file = file_path }
+  parser.on("--folder=Folder", "Specifies the folder where scenes to parse") do |folder_path|
+    raise ArgumentError.new("Folder does not exist") unless Dir.exists?(folder_path)
+    raise ArgumentError.new("You can't specify both a file and a folder") if file
+    folder = folder_path
   end
   parser.on("-h", "--help", "Show this help") do
     puts parser
@@ -25,5 +25,11 @@ OptionParser.parse do |parser|
 end
 
 test = TsncParser.new
-test.parse_folder("./scenes/")
+if temp_folder = folder
+  test.parse_folder(Path.new(temp_folder))
+end
+
+if temp_file = file
+  test.parse_file(Path.new(temp_file))
+end
 test.output_result!

@@ -10,6 +10,7 @@ class TsncParser
 
   @missing_files = [] of String
   @missing_resources = [] of String
+  @nodes = [] of Node
 
   def parse_folder(folder : Path)
     raise "Can't find #{folder}" unless Dir.exists?(folder)
@@ -24,21 +25,21 @@ class TsncParser
   end
 
   def output_result!
-    if test.missing_files.size > 0
+    if missing_files.size > 0
       puts "Missing files:"
-      test.missing_files.each do |file|
+      missing_files.each do |file|
         puts "- #{file}"
       end
     end
 
-    if test.missing_resources.size > 0
+    if missing_resources.size > 0
       puts "Missing resources:"
-      test.missing_resources.each do |resource|
+      missing_resources.each do |resource|
         puts "- #{resource}"
       end
     end
 
-    if test.missing_files.size > 0 || test.missing_resources.size > 0
+    if missing_files.size > 0 || missing_resources.size > 0
       exit 1
     end
   end
